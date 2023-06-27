@@ -1,0 +1,238 @@
+/* .navbar {
+  background: linear-gradient(to right, #CBE4DE, #f5deb3);
+} */
+.navbar-brand{
+  padding-left: 4.95%;
+  font-weight: bold;
+}
+/* .nav-btn{
+  background: #6246ea;
+  color: white;
+} */
+/* .nav-btn:hover,
+.nav-btn:focus{
+  outline-offset: 3px;
+  /* background: black;
+  color: white; */
+/* } */
+
+.nav-btn{
+	display: inline-block;
+	/* padding: 10px 20px; */
+	background: #6246ea;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	outline: 1px solid #6246ea;
+	cursor: pointer;
+	transition: outline-offset .25s;
+}
+.nav-btn:hover,
+.nav-btn:focus{
+	outline-offset: 3px;
+  background: #6246ea;
+  color: white;
+}
+/* .nav-btn:is(:hover, :focus){
+	outline-offset: 3px;
+} */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+/* .dropdown:hover .dropbtn {background-color: #3e8e41;} */
+
+.page-link:hover{
+  color: white;
+}
+
+.heading-text{
+  font-family: 'Poppins';
+  font-weight: bold;
+  padding-left: 10%;
+  padding-top: 18%;
+  font-size: 400%;
+  line-height: 140%;
+
+  /* padding-right: 2%; */
+}
+.heading-img{
+  padding-left: 13%;
+  
+}
+.vl {
+  border-left: .20rem solid black;
+  height: 12%;
+  margin-left: 11%;
+  margin-right: 11%;
+  margin-top: 4%;
+}
+.vl-text{
+  padding-left: 2%;
+  padding-right: 9%;
+  padding-bottom: 4%;
+}
+.content-first{
+  padding-bottom: 6%;
+}
+
+.category{
+  margin-left: 6%;
+}
+.card-category {
+  
+  transition: 0.3s;
+  background-color: #fff;
+  height: 210px;
+  width: 175px;
+  /* justify-content: center; */
+  border-radius: 5px;
+  border: 1px solid white;
+  cursor: pointer;
+  box-shadow: 1px 1px 5px 1px #02010133;
+}
+.card-text{
+  text-align: center;
+  padding-top: 7%;
+
+}
+.category-link{
+  padding-left: 70%;
+  
+}
+
+a:link{
+  color: black;
+}
+
+.card-img {
+  border-radius: 5px 5px 0 0;
+  height: 75%;
+}
+.empty-div{
+  /* border-left: .20rem solid black; */
+  height: 50px;
+  /* background: #6246ea; */
+  /* margin-left: 11%; */
+  /* margin-right: 11%; */
+  margin-top: 4%;
+
+}
+.displayCard{
+   /* background:linear-gradient(to bottom, #CBE4DE, #f5deb3); */
+
+  padding-left: 10%; 
+  
+  /* padding-top: 5%; */
+  /* padding-bottom: 80%; */
+  transition: 0.3s;
+  background-color: #fff;
+  height: 400px;
+  width: 350px;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid white;
+  cursor: pointer;
+  /* box-shadow: 1px 1px 5px 1px #02010133; */
+}
+.rowDiv{
+  margin-left: 5%;
+  margin-right: 2%;
+}
+
+
+.SearchBar{
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 1%;
+}
+
+.card-news{
+  height: 270px;
+  width: 90%;
+  border-radius: 5px 5px 0 0;
+}
+
+.end-div{
+  padding-top: 5%;
+  padding-bottom: 10%;
+}
+.end-img-container{
+  background-color: #fff;
+  padding: 20px;
+  margin-left: 43%;
+  margin-right: 45%;
+  border-radius: 400px;
+}
+.end-text-container{
+  padding-top: 2%;
+  text-align: center;
+}
+.subscribe-btn{
+  
+  background: #6246ea;
+  color: white;
+}
+.footer{
+  background: #e4e5e9;
+}
+footer{
+  height: 400px;
+  padding-left: 10%;
+  padding-top: 10%;
+}
+
+
+
+
+
+
+
+
+.compose {
+  margin-top: 3%;
+  
+}
+
+.composeH1 {
+  text-decoration: underline;
+  margin-bottom: 2%;
+  font-family: "Dancing Script";
+}
+.about{
+  padding-top: 5%;
+  
+}
+.info{
+  padding-left: 7%;
+  /* align-items: center; */
+}
+
+
+
+
+
+@media screen and (max-width: 612px) {
+  
+}

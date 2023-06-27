@@ -1,0 +1,199 @@
+<%- include('partials/header') %>
+
+<section class=" bg-body-secondary ">
+  <div class="row  container-fluid content-first">
+    <div class="col-lg-6">
+      
+        <h1 class=" heading-text">Blog Reading & Writing - Simplified</h1>
+        <div class="vl">
+          <p class="vl-text">In this place, we share our learning, views, knowledge, etc. Not only
+            that, we provide everyday people a place to share their ideas too!
+            Make sure you subscribe to get the latest update.</p>
+        </div>
+      
+    </div>
+    <div class="col-lg-6 heading-img py-4 ">
+      <img src="images/homeImg.png" alt="">
+    </div>
+
+  </div>
+  <div class="category">
+    <p>Browse The Category --
+    <a class="category-link" href="/categoryPage">See All Catagory ></a></p>
+  </div>
+  <div class="row rowDiv " >
+
+    
+      <div class=" col my-5">
+        <a href="/global">
+          <div class="card-category">
+            <img class="card-img" src="images/global.png" alt="Avatar">
+              
+            <h6 class="card-text"><b>Global Affairs</b></h6>
+            <!-- <p>Architect & Engineer</p> -->
+              
+          </div>
+        </a>
+      </div>
+    
+    <div class="col my-5">
+      <a href="/tech">
+        <div class="card-category">
+          <img class="card-img" src="images/tech.png" alt="Avatar">
+            
+          <h6 class="card-text"><b>Tech News</b></h6>
+          <!-- <p>Architect & Engineer</p> -->
+            
+        </div>
+      </a>
+    </div>
+    <div class="col  my-5">
+      <a href="/stock">
+        <div class="card-category">
+          <img class="card-img" src="images/stock.png" alt="Avatar">
+            
+          <h6 class="card-text"><b>Stock Market</b></h6>
+          <!-- <p>Architect & Engineer</p> -->
+            
+        </div>
+      </a>
+    </div>
+    <div class=" col my-5">
+      <a href="/crime">
+        <div class="card-category">
+          <img class="card-img" src="images/crime.png" alt="Avatar">
+            
+          <h6 class="card-text"><b>Crime News</b></h6>
+          <!-- <p>Architect & Engineer</p> -->
+            
+        </div>
+      </a>
+    </div>
+    <div class=" col my-5">
+      <a href="/govtp">
+        <div class="card-category">
+          <img class="card-img" src="images/govtp.png" alt="Avatar">
+            
+          <h6 class="card-text"><b>Government news</b></h6>
+          <!-- <p>Architect & Engineer</p> -->
+            
+        </div>
+      </a>
+    </div>
+   
+    
+  </div> 
+  <div class="empty-div bg-body-tertiary"></div>
+</section>
+
+
+<section class="sec-body">
+  <div >
+    <form class="d-flex SearchBar" role="search" method="GET" action="/search">
+      <input class="form-control me-2 mb-2" id="searchBox"  type="search" placeholder="Search By News City Name" aria-label="Search" name="searchByCity">
+      <button class="btn nav-btn " type="submit">Search</button>
+    </form>
+  </div>
+  
+  
+  
+  <div class="row rowDiv" >
+  <% posted.forEach(function(post){ %>
+    <div class=" data-cards col-lg-4 my-5">
+      <div class="displayCard">
+      <!-- <div class=" displayCard p-5 rounded"> -->
+        <div class="mx-auto">
+          <img class="card-news" src="images/<%= post.type %>.png" alt="xyz">
+          <p><b><%= post.title.substring(0,30) %>....</b></p>
+          
+          <a href="/posts/<%= post._id  %>"><button class="btn btn-dark" type="submit">Read More</button></a>
+            <br>
+          <p><%= post.date %>-<%= post.month %>-<%= post.year %></p>
+          <p><%= post.author %></p>
+  
+        </div>
+      </div>
+    </div>
+  <% }) %>
+  </div>
+  <div class="empty-div bg-body-tertiary"></div>
+  <div>
+    <div class="end-div bg-body-secondary">
+      <div class="end-img-container">
+        <img src="images/postBox.png" alt="">
+      </div>
+      <div class="end-text-container">
+        <h2><b>Subscribe For The Lastest Updates</b></h2>
+        <p>Subscribe to newsletter and never miss the new post every week.</p>
+      </div>
+      <div >
+        <form class="d-flex SearchBar" role="search" method="GET" action="/subscribe">
+          <input class="form-control me-2" id="searchBox"  type="search" placeholder="Enter your Email here" aria-label="Search" name="searchByCity">
+          <button class="btn nav-btn " type="submit">Subscribe</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+   
+
+<script type="text/javascript">
+  const showPosition = (position) => {
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+    console.log(lat, long);
+    const locationFetchApi = `http://localhost:3000/locate?lat=${lat}&long=${long}`;
+
+    if(document.location.href == "http://localhost:3000/"){
+    fetch(locationFetchApi)
+      .then((response) => response.json())
+      .then((json) => {
+        var a = json.city;
+        document.location = `/?city=${a}`;
+      
+
+        // $(document).ready(function () {
+        //     $.post('/',   // url
+        //         {a}, // data to be submit
+        //         function(data, status, jqXHR) {// success callback
+        //         $('p').append('status: ' + status + ', data: ' + data);
+        //     });
+        // });
+      });}
+  };
+  const showError = (error) => {
+    console.log(error);
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert(" User denied the permission for location");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert(" USER LOCATION IS UNAVAILABLE");
+        break;
+      case error.TIMEOUT:
+        alert(" TIME OUT");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert(" UNKNOWN ERROR OCCURED");
+        break;
+      default:
+        alert("Unknown Error");
+    }
+  };
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Geolocation is not supported by this browser");
+    }
+  };
+  getLocation();
+</script>
+
+<%- include('partials/footer') %>

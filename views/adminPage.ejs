@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<h1>abc</h1>
+<br>
+<a class="btn btn-dark btn-lg" href="/logout" role="button">Log Out</a>
+<br>
+<div class="row rowDiv" >
+  <% posted.forEach(function(post){ %>
+    <div class="container col-lg-3 my-5">
+      <div class="bg-body-tertiary p-5 rounded">
+        <div class="mx-auto">
+          <p><b><%= post.title.substring(0,40) %></b></p>
+            <p><%= post.content.substring(0,100) + " ...." %><a href="/posts/<%= post._id  %>"><u>Read more</u></a>
+            <br>
+            <p><%= post.date %>-<%= post.month %>-<%= post.year %></p>
+            <a class="btn btn-dark btn-lg" href="/del/<%= post._id  %>" role="button">delete</a>
+          </p>
+  
+        </div>
+      </div>
+    </div>
+  <% }) %>
+<%- include('partials/footer2') %>

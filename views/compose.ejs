@@ -1,0 +1,128 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+  <div class="container compose">
+    
+    <a class="btn btn-dark btn-lg" href="/logout" role="button">Log Out</a>
+<br><br>
+    <h1 class="composeH1">Compose Here :</h1>
+    <form action="/compose" method="post">
+      <div class="mb-3">
+        <label for="tbox" class="form-label">Title</label>
+        <input type="text" class="form-control" id="tbox" name="postTitle" />
+      </div>
+      <div class="mb-3">
+        <label for="pbox" class="form-label">Post</label>
+        <textarea
+          class="form-control"
+          id="pbox"
+          rows="6"
+          name="postBody"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        
+          
+        
+        <label>City</label>
+        <input type="text" value="city" id="city" name="postCity" />
+        <label>State</label>
+        <input type="text" name="postState" />
+        <label>Country</label>
+        <input type="text" name="postCountry" />
+        <label>Author</label>
+        <input type="text" name="postAuthor" />
+        <br /><br />
+        <label>Date</label>
+        <input type="text" name="postDate" />
+        <label>Month</label>
+        <input type="text" name="postMonth" />
+        <label>Year</label>
+        <input type="text" name="postYear" />
+        <!-- <label>Type</label>
+        <input type="text" name="postType" /> -->
+
+
+
+        <label for="cars">Type of post:</label>
+        <select name="postType" id="cars">
+          <option value="global">Global</option>
+          <option value="tech">Tech</option>
+          <option value="stock">stock</option>
+          <option value="corporate">Corporate</option>
+          <option value="crime"> Crime</option>
+          <option value="govts">Govt Subsidiy</option>
+          <option value="govtp">Govt Press Release</option>
+        </select>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Publish</button>
+    </form>
+
+    <hr />
+
+    
+  </div>
+</div>
+<script type="text/javascript">
+  const showPosition = (position) => {
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+    console.log(lat, long);
+    const locationFetchApi = `http://localhost:3000/locate?lat=${lat}&long=${long}`;
+    fetch(locationFetchApi)
+      .then((response) => response.json())
+      .then((json) => {
+        var a = json.city;
+        document.getElementById("city").value = a;
+        console.log(a);
+
+        // $(document).ready(function () {
+        //     $.post('/',   // url
+        //         {a}, // data to be submit
+        //         function(data, status, jqXHR) {// success callback
+        //         $('p').append('status: ' + status + ', data: ' + data);
+        //     });
+        // });
+      });
+  };
+  const showError = (error) => {
+    console.log(error);
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert(" User denied the permission for location");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert(" USER LOCATION IS UNAVAILABLE");
+        break;
+      case error.TIMEOUT:
+        alert(" TIME OUT");
+        break;
+      case error.UNKNOWN_ERROR:
+        alert(" UNKNOWN ERROR OCCURED");
+        break;
+      default:
+        alert("Unknown Error");
+    }
+  };
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Geolocation is not supported by this browser");
+    }
+  };
+  getLocation();
+</script>
+<%- include('partials/footer2') %>
