@@ -8,7 +8,7 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const axios = require("axios");
-
+require('dotenv').config();
 const app = express();
 
 app.use(express.static("public"));
@@ -37,7 +37,9 @@ mongoose.set("strictQuery", true);
 //   .then(() => console.log("Successfully connected to MongoDB"))
 //   .catch((err) => console.error("Connection error", err));
 
-mongoose.connect("mongodb+srv://sample01:mynameiskhan1@cluster1.kq1qbar.mongodb.net/newsportal", {useNewUrlParser:true , useUnifiedTopology:true})
+
+
+mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser:true , useUnifiedTopology:true})
 .then( ()=> console.log("success") )
 .catch((err) => console.log(err));
 
