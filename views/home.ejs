@@ -148,9 +148,9 @@
     let lat = position.coords.latitude;
     let long = position.coords.longitude;
     console.log(lat, long);
-    const locationFetchApi = `http://localhost:3000/locate?lat=${lat}&long=${long}`;
+    const locationFetchApi = `https://news-at-your-tips2.onrender.com/locate?lat=${lat}&long=${long}`;
 
-    if(document.location.href == "http://localhost:3000/"){
+    if(document.location.href == "https://news-at-your-tips2.onrender.com/"){
     fetch(locationFetchApi)
       .then((response) => response.json())
       .then((json) => {
@@ -158,13 +158,6 @@
         document.location = `/?city=${a}`;
       
 
-        // $(document).ready(function () {
-        //     $.post('/',   // url
-        //         {a}, // data to be submit
-        //         function(data, status, jqXHR) {// success callback
-        //         $('p').append('status: ' + status + ', data: ' + data);
-        //     });
-        // });
       });}
   };
   const showError = (error) => {
