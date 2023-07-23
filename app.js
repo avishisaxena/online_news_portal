@@ -25,7 +25,7 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); //to authorize the user again and again without having to fill login details
 
 mongoose.set("strictQuery", true);
 
@@ -70,6 +70,9 @@ const postSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 // adminSchema.plugin(passportLocalMongoose);
 
+//the plugin adds fields like username and password to the schema with appropriate validation and hashing mechanisms, making it ready for local authentication.
+//With passportLocalMongoose applied to the userSchema, you no longer need to manually handle password hashing, salt generation, and other authentication-related operations. 
+
 const User = new mongoose.model("User", userSchema);
 const Post = new mongoose.model("Post", postSchema);
 // const Admin = new mongoose.model("Admin", adminSchema);
@@ -78,8 +81,8 @@ const Post = new mongoose.model("Post", postSchema);
 passport.use(User.createStrategy());
 // passport.use(Admin.createStrategy());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser()); //serialize the user data into a format that can be stored in the session
+passport.deserializeUser(User.deserializeUser()); //takes the serialized user identifier and should return the complete user object associated with that identifier.
 // passport.serializeUser(Admin.serializeUser());
 // passport.deserializeUser(Admin.deserializeUser());
 
@@ -307,7 +310,7 @@ app.get("/login", function (req, res) {
 });
 
 app.get("/logout", function (req, res) {
-  req.logout(function (err) {
+  req.logout(function (err) { //method provided by Passport.js to log the user out of the session
     if (err) {
       console.log(err);
     }
@@ -324,32 +327,8 @@ app.get("/compose", function (req, res) {
 app.get("/authentication", function (req, res) {
   res.render("authentication");
 });
-// app.get("/admin", function(req,res){
-//   if (req.isAuthenticated()) {
-//     res.redirect("adminPage");
-//   } else {
-//     res.render("admin");
-//   }
-  
-// });
-// app.get("/adminPage", function(req,res){
-//   Post.find({}, function (err, foundPosts) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.render("adminPage", { posted: foundPosts });
-//     }
-//   });
-// });
-// app.get("/adminLogout", function (req, res) {
-//   req.logout(function (err) {
-//     if (err) {
-//       console.log(err);
-//     }
-//     res.redirect("/");
-//   });
-// });
-app.get("/posts/:postId", (req, res) => {
+
+app.get("/posts/:postId", (req, res) => { //displays the requested post
   const requestedPostId = req.params.postId;
   if (requestedPostId){
     Post.find({ _id: requestedPostId }, function (err, foundPosts) {
@@ -391,38 +370,6 @@ app.get("/subscribe",function(req,res){
 
 app.post("/", function (req, res) {
 });
-// app.post("/registerAdmin", function (req, res) {
-//   Admin.register(
-//     { username: req.body.username },
-//     req.body.password,
-//     function (err, user) {
-//       if (err) {
-//         console.log(err);
-//         res.redirect("/admin");
-//       } else {
-//         passport.authenticate("local")(req, res, function () {
-//           res.redirect("/adminPage");
-//         });
-//       }
-//     }
-//   );
-// });
-
-// app.post("/loginAdmin", function (req, res) {
-//   const admin = new Admin({
-//     username: req.body.username,
-//     password: req.body.password,
-//   });
-//   req.login(admin, function (err) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       passport.authenticate("local")(req, res, function () {
-//         res.redirect("/adminPage");
-//       });
-//     }
-//   });
-// });
 
 app.post("/register", function (req, res) {
   User.register(
